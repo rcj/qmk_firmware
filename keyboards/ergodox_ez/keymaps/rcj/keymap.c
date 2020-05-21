@@ -7,7 +7,6 @@
 
 enum rcj_layers {
   _QWERTY = 0,
-  _FFXIV,
   _MOVEMENT,
   _BRACES,
   _SYMBOLS,
