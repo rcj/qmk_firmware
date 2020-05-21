@@ -7,7 +7,6 @@
 
 enum rcj_layers {
   _QWERTY = 0,
-  _FFXIV,
   _MOVEMENT,
   _BRACES,
   _SYMBOLS,
@@ -29,7 +28,7 @@ enum rcj_keycodes {
 #define LEADER LCTL(KC_T)
 #define SLCTL_T(kc) MT((MOD_LCTL | MOD_LGUI), kc)
 #define SLALT_T(kc) MT((MOD_LCTL | MOD_LALT), kc)
-#define KC_SAE MT((MOD_LGUI | MOD_LALT), KC_ENT)
+#define KC_CME MT((MOD_LCTL | MOD_LALT), KC_ENT)
 #define KC_SCD MT((MOD_LGUI | MOD_LCTL), KC_DEL)
 #define KC_ZMV LT(_MOVEMENT, KC_Z)
 #define KC_MOV MO(_MOVEMENT)
@@ -55,7 +54,6 @@ enum rcj_keycodes {
 #define _______ KC_TRNS
 #define ALCT(kc) (kc | QK_LCTL | QK_LALT)
 #define KC_ALCT ALCT(KC_NO)
-
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 0: Basic layer
@@ -85,7 +83,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         // left hand
         KC_ESC, KC_1,    KC_2,    KC_3,        KC_4,      KC_5,   _______,
         KC_TAB, KC_Q,    KC_W,    KC_E,        KC_R,      KC_T,   _______,
-        KC_SAE, KC_A,    KC_S,    KC_D,        KC_F,      KC_G,
+        KC_CME, KC_A,    KC_S,    KC_D,        KC_F,      KC_G,
         KC_SCD, KC_Z,    KC_X,    KC_C,        KC_V,      KC_B,   _______,
         KC_ESC, _______, _______, KC_MOV,      KC_LCTL,
                                                            _______, SYM_FFXIV,
