@@ -17,8 +17,7 @@ enum rcj_keycodes {
   QWERTY = SAFE_RANGE,
   SYM_CBR,
   SYM_PRN,
-  SYM_BRC,
-  SYM_FFXIV
+  SYM_BRC
 };
 
 #define MOD_SHIFT_MASK  (MOD_BIT(KC_LSHIFT)|MOD_BIT(KC_RSHIFT))
@@ -70,7 +69,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *   | Esc      |      |      | NPAD |   Ctrl  |                                       |  Alt  | GUI  |      | ADJUST  | Esc          |
  *   `-----------------------------------------'                                       `----------------------------------------------'
  *                                       ,------------------.       ,---------------.
- *                                       |          | FFXIV |       |      |        |
+ *                                       |          |       |       |      |        |
  *                                ,------|----------|-------|       |------+--------+------.
  *                                |      |          |       |       |      |        |      |
  *                                |  SPC | Esc      |-------|       |------| C-c    | Shift|
@@ -86,7 +85,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_CME, KC_A,    KC_S,    KC_D,        KC_F,      KC_G,
         KC_SCD, KC_Z,    KC_X,    KC_C,        KC_V,      KC_B,   _______,
         KC_ESC, _______, _______, KC_MOV,      KC_LCTL,
-                                                           _______, SYM_FFXIV,
+                                                           _______, _______,
                                                                     _______,
                                                    KC_SPC, KC_ESC,  _______,
         // right hand
@@ -94,26 +93,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
              _______, KC_Y, KC_U,    KC_I,    KC_O,    KC_P,    _______,
                       KC_H, KC_J,    KC_K,    KC_L,    KC_SYM,  KC_QUOT,
              _______, KC_N, KC_M,    KC_COMM, KC_DOT,  KC_BRSL, KC_HYPR,
-                            KC_LALT, KC_LGUI, _______, MO(_ADJUST),          KC_ESC,
-             _______, _______,
-             _______,
-             _______, LCTL(KC_C), KC_LSFT
-    ),
-[_FFXIV] = LAYOUT_ergodox(
-        // left hand
-        KC_ESC,  KC_1,    KC_2,    KC_3,        KC_4,      KC_5,   _______,
-        KC_TAB,  KC_Q,    KC_W,    KC_E,        KC_R,      KC_T,   ALCT(KC_K),
-        KC_LSFT, KC_A,    KC_S,    KC_D,        KC_F,      KC_G,
-        KC_ALCT, KC_ZMV,  KC_X,    KC_C,        KC_V,      KC_B,   ALCT(KC_L),
-        KC_ESC,  _______, _______, KC_LCTL,     KC_LALT,
-                                                           _______, QWERTY,
-                                                                    _______,
-                                              KC_SPC, KC_ALCT,  _______,
-        // right hand
-             _______, KC_6, KC_7,    KC_8,    KC_9,    KC_0,   _______,
-             _______, KC_Y, KC_U,    KC_I,    KC_O,    KC_P,   _______,
-                      KC_H, KC_J,    KC_K,    KC_L,    KC_SYM, KC_QUOT,
-             _______, KC_N, KC_M,    KC_COMM, KC_DOT,  LT(_BRACES, KC_SLSH), KC_HYPR,
                             KC_LALT, KC_LGUI, _______, MO(_ADJUST),          KC_ESC,
              _______, _______,
              _______,
