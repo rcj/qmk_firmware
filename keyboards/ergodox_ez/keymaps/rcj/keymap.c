@@ -37,9 +37,17 @@ enum rcj_keycodes {
   FF_G,
   FF_Z,
   FF_X,
-  FF_C,
   FF_V,
   FF_B,
+  FF_Y,
+  FF_H,
+  FF_J,
+  FF_K,
+  FF_L,
+  FF_N,
+  FF_M,
+  FF_COMM,
+  FF_DOT,
   FF_LSFTF
 };
 
@@ -126,17 +134,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_ESC, FF_1,    FF_2,    FF_3,        FF_4,      FF_5,   _______,
         KC_TAB, FF_Q,    FF_W,    KC_E,        FF_R,      FF_T,   FF_LSFTF,
         KC_CME, FF_A,    KC_S,    KC_D,        KC_F,      FF_G,
-        KC_SCD, FF_Z,    FF_X,    FF_C,        FF_V,      FF_B,   _______,
+        KC_SCD, FF_Z,    FF_X,    KC_C,        FF_V,      FF_B,   _______,
         KC_ESC, _______, _______, KC_LALT,     KC_LCTL,
                                                    TG(_FFXIV), TG(_FFXIV),
                                                                     _______,
                                                    KC_SPC, KC_LALT, _______,
         // right hand
              _______, FF_6, FF_7,    FF_8,    FF_9,    FF_0,    KC_BSPC,
-             _______, KC_Y, KC_U,    KC_I,    KC_O,    KC_P,    _______,
-                      KC_H, KC_J,    KC_K,    KC_L,    KC_SYM,  KC_QUOT,
-             _______, KC_N, KC_M,    KC_COMM, KC_DOT,  KC_BRSL, KC_HYPR,
                             KC_LALT, KC_LGUI, _______, MO(_ADJUST),          KC_ESC,
+             _______, FF_Y, KC_U,    KC_I,    KC_O,    KC_P,    _______,
+                      FF_H, FF_J,    FF_K,    FF_L,    KC_SYM,  KC_QUOT,
+             _______, FF_N, FF_M,    FF_COMM, FF_DOT,  KC_BRSL, KC_HYPR,
              _______, _______,
              _______,
              _______, LCTL(KC_C), KC_LSFT
@@ -171,10 +179,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                     _______,
                                   _______, _______, _______,
     // right hand
-       _______,  KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,
-       _______,  KC_KP_0, KC_KP_7, KC_KP_8, KC_KP_9, KC_PMNS, KC_F12,
-                 KC_DOT,  KC_KP_4, KC_KP_5, KC_KP_6, KC_PPLS, KC_F13,
-       _______,  KC_COMM, KC_KP_1, KC_KP_2, KC_KP_3, KC_PAST, KC_F14,
+       _______,  KC_F6,   KC_F7, KC_F8, KC_F9, KC_F10,  KC_F11,
+       _______,  KC_0,    KC_7,  KC_8,  KC_9,  KC_PMNS, KC_F12,
+                 KC_DOT,  KC_4,  KC_5,  KC_6,  KC_PPLS, KC_F13,
+       _______,  KC_COMM, KC_1,  KC_2,  KC_3,  KC_PAST, KC_F14,
                           _______, _______, _______, _______, _______,
        _______, _______,
        _______,
@@ -305,9 +313,17 @@ uint16_t get_key_to_repeat(uint16_t keycode) {
         case FF_G: return KC_G;
         case FF_Z: return KC_Z;
         case FF_X: return KC_X;
-        case FF_C: return KC_C;
         case FF_V: return KC_V;
         case FF_B: return KC_B;
+        case FF_Y: return KC_Y;
+        case FF_H: return KC_H;
+        case FF_J: return KC_J;
+        case FF_K: return KC_K;
+        case FF_L: return KC_L;
+        case FF_N: return KC_N;
+        case FF_M: return KC_M;
+        case FF_COMM: return KC_COMM;
+        case FF_DOT: return KC_DOT;
         case FF_1: return KC_1;
         case FF_2: return KC_2;
         case FF_3: return KC_3;
@@ -360,9 +376,17 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case FF_G:
         case FF_Z:
         case FF_X:
-        case FF_C:
         case FF_V:
         case FF_B:
+        case FF_Y:
+        case FF_H:
+        case FF_J:
+        case FF_K:
+        case FF_L:
+        case FF_N:
+        case FF_M:
+        case FF_COMM:
+        case FF_DOT:
         case FF_1:
         case FF_2:
         case FF_3:
