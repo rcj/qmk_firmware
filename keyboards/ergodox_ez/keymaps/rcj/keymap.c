@@ -65,15 +65,15 @@ enum rcj_keycodes {
 #define KC_SS MT(MOD_LSFT, KC_SPACE)
 #define KC_BRSL LT(_BRACES, KC_SLSH)
 #define KC_SYM MO(_SYMBOLS)
-#define KC_SBUF LCAG(KC_B)
-#define KC_PREF LCAG(KC_U)
-#define KC_SWIN LCAG(KC_N)
+#define KC_SBUF MEH(KC_B)
+#define KC_PREF MEH(KC_U)
+#define KC_SWIN MEH(KC_N)
 #define KC_ADJT MO(_ADJUST)
-#define KC_DQOT LCAG(KC_Q)
-#define KC_DBRK LCAG(KC_R)
-#define KC_DBRC LCAG(KC_F)
-#define KC_DCRL LCAG(KC_C)
-#define KC_ANGL LCAG(KC_M)
+#define KC_DQOT MEH(KC_Q)
+#define KC_DBRK MEH(KC_R)
+#define KC_DBRC MEH(KC_F)
+#define KC_DCRL MEH(KC_C)
+#define KC_ANGL MEH(KC_M)
 #define KC_DBUG DEBUG
 #define KC_RST RESET
 #define KC_SBRC SYM_BRC
