@@ -1,14 +1,11 @@
 #include QMK_KEYBOARD_H
 #include "version.h"
 
-#define MOD_SHIFT_MASK  (MOD_BIT(KC_LSHIFT)|MOD_BIT(KC_RSHIFT))
-#define MOD_CTRL_MASK   (MOD_BIT(KC_LCTL)|MOD_BIT(KC_RCTRL))
-#define MOD_ALT_MASK    (MOD_BIT(KC_LALT)|MOD_BIT(KC_RALT))
-
 enum rcj_layers {
   _QWERTY = 0,
   _FFXIV,
   _MOVEMENT,
+  _MOVEMENT_FFXIV,
   _BRACES,
   _SYMBOLS,
   _ADJUST
@@ -48,7 +45,8 @@ enum rcj_keycodes {
   FF_M,
   FF_COMM,
   FF_DOT,
-  FF_LSFTF
+  FF_LSFTF,
+  FF_RECD
 };
 
 #define MOD_SHIFT_MASK  (MOD_BIT(KC_LSHIFT)|MOD_BIT(KC_RSHIFT))
@@ -62,6 +60,7 @@ enum rcj_keycodes {
 #define KC_SCD MT((MOD_LGUI | MOD_LCTL), KC_DEL)
 #define KC_ZMV LT(_MOVEMENT, KC_Z)
 #define KC_MOV MO(_MOVEMENT)
+#define KC_MXIV MO(_MOVEMENT_FFXIV)
 #define KC_SS MT(MOD_LSFT, KC_SPACE)
 #define KC_BRSL LT(_BRACES, KC_SLSH)
 #define KC_SYM MO(_SYMBOLS)
@@ -131,7 +130,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 [_FFXIV] = LAYOUT_ergodox(
         // left hand
-        KC_ESC, FF_1,    FF_2,    FF_3,        FF_4,      FF_5,   _______,
+        KC_ESC, FF_1,    FF_2,    FF_3,        FF_4,      FF_5,   FF_RECD,
         KC_TAB, FF_Q,    FF_W,    KC_E,        FF_R,      FF_T,   FF_LSFTF,
         KC_CME, FF_A,    KC_S,    KC_D,        KC_F,      FF_G,
         KC_SCD, FF_Z,    FF_X,    KC_C,        FF_V,      FF_B,   _______,
@@ -141,13 +140,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                    KC_SPC, KC_LALT, _______,
         // right hand
              _______, FF_6, FF_7,    FF_8,    FF_9,    FF_0,    KC_BSPC,
-             _______, FF_Y, KC_U,    KC_I,    KC_O,    KC_P,    _______,
-                      FF_H, FF_J,    FF_K,    FF_L,    KC_SYM,  KC_QUOT,
-             _______, FF_N, FF_M,    FF_COMM, FF_DOT,  KC_BRSL, KC_HYPR,
+             FF_RECD, FF_Y, KC_U,    KC_I,    KC_O,    KC_P,    _______,
+                      FF_H, FF_J,    FF_K,    FF_L,    KC_MXIV,  KC_QUOT,
+             KC_EQL,  FF_N, FF_M,    FF_COMM, FF_DOT,  KC_BRSL, KC_HYPR,
                             KC_ALCT,KC_LGUI, KC_LGUI, MO(_ADJUST),          KC_ESC,
              _______, _______,
              _______,
-             _______, LCTL(KC_C), KC_LSFT
+             _______, FF_0,    KC_LSFT
     ),
 [_SYMBOLS] = LAYOUT_ergodox(
        // left hand
@@ -184,6 +183,25 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                  KC_DOT,  KC_4,  KC_5,  KC_6,  KC_PPLS, KC_F13,
        _______,  KC_COMM, KC_1,  KC_2,  KC_3,  KC_PAST, KC_F14,
                           _______, _______, _______, _______, _______,
+       _______, _______,
+       _______,
+       _______, _______, _______
+),
+[_MOVEMENT_FFXIV] = LAYOUT_ergodox(
+       _______, KC_F1,     KC_F2,     KC_F3,     KC_F4,     KC_F5,     _______,
+       _______, MEH(KC_Q), MEH(KC_W), KC_E,      MEH(KC_R), MEH(KC_T), MEH(KC_F1),
+       _______, MEH(KC_A), KC_S,      KC_D,      KC_F,      MEH(KC_G),
+       _______, MEH(KC_Z), MEH(KC_X), MEH(KC_C), KC_ENT,    MEH(KC_B), MEH(KC_F2),
+       _______, _______,   _______, _______, _______,
+                                               _______, _______,
+                                                        _______,
+                                  MEH(KC_SPC), _______, _______,
+    // right hand
+       _______,  KC_F6,     KC_F7,     KC_F8,     KC_F9,     KC_F10,  KC_F11,
+       _______,  MEH(KC_0), MEH(KC_7), MEH(KC_8), MEH(KC_9), _______, _______,
+                 MEH(KC_H), MEH(KC_4), MEH(KC_5), MEH(KC_6), _______, _______,
+       _______,  MEH(KC_N), MEH(KC_1), MEH(KC_2), MEH(KC_3), _______, _______,
+                            _______,   _______,    _______,  _______, _______,
        _______, _______,
        _______,
        _______, _______, _______
@@ -397,6 +415,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case FF_8:
         case FF_9:
         case FF_0:
+        {
             if (record->event.pressed) {
                 key_to_repeat = get_key_to_repeat(keycode);
                 register_code(key_to_repeat);
@@ -405,9 +424,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
               } else {
                   if (key_to_repeat == get_key_to_repeat(keycode))
                       key_to_repeat = 0;
-          }
-          return false;
+            }
+            return false;
+        }
         case FF_LSFTF:
+        {
             if (record->event.pressed) {
                 register_code(KC_LSFT);
                 register_code(KC_F);
@@ -415,7 +436,21 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 unregister_code(KC_F);
                 unregister_code(KC_LSFT);
             }
-	    return false;
+            return false;
+        }
+        case FF_RECD:
+        {
+            if (record->event.pressed) {
+                register_code(KC_LGUI);
+                register_code(KC_LALT);
+                register_code(KC_R);
+            } else {
+                unregister_code(KC_R);
+                unregister_code(KC_LALT);
+                unregister_code(KC_LGUI);
+            }
+            return false;
+        }
     }
     return true;
 }
