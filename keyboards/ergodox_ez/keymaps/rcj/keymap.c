@@ -80,7 +80,6 @@ enum rcj_keycodes {
 #define KC_SCBR SYM_CBR
 
 #define KC_ KC_TRNS
-#define _______ KC_TRNS
 #define ALCT(kc) (kc | QK_LCTL | QK_LALT)
 #define KC_ALCT ALCT(KC_NO)
 
