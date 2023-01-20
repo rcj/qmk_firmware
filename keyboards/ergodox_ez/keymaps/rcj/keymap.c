@@ -49,7 +49,7 @@ enum rcj_keycodes {
   FF_RECD
 };
 
-#define MOD_SHIFT_MASK  (MOD_BIT(KC_LSHIFT)|MOD_BIT(KC_RSHIFT))
+#define MOD_SHIFT_MASK  (MOD_BIT(KC_LSFT)|MOD_BIT(KC_RSFT))
 #define MOD_CTRL_MASK   (MOD_BIT(KC_LCTL)|MOD_BIT(KC_RCTRL))
 #define MOD_ALT_MASK    (MOD_BIT(KC_LALT)|MOD_BIT(KC_RALT))
 
@@ -73,8 +73,8 @@ enum rcj_keycodes {
 #define KC_DBRC MEH(KC_F)
 #define KC_DCRL MEH(KC_C)
 #define KC_ANGL MEH(KC_M)
-#define KC_DBUG DEBUG
-#define KC_RST RESET
+#define KC_DBUG DB_TOGG
+#define KC_RST QK_BOOT
 #define KC_SBRC SYM_BRC
 #define KC_SPRN SYM_PRN
 #define KC_SCBR SYM_CBR
@@ -248,10 +248,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 [_ADJUST] = LAYOUT_ergodox(
        _______, _______, _______, _______, _______, _______, _______,
-       _______, RESET,   DEBUG,   _______, _______, _______, _______,
+       _______, KC_RST,  KC_DBUG,   _______, _______, _______, _______,
        _______, QWERTY,  _______, AU_ON,   AU_OFF,  AG_NORM,
-       DEBUG,   MUV_DE,  MUV_IN,  MU_ON,   MU_OFF,  MI_ON,   _______,
-       RESET,   _______, _______, _______, _______,
+       KC_DBUG,   MUV_DE,  MUV_IN,  MU_ON,   MU_OFF,  MI_ON,   _______,
+       KC_RST ,   _______, _______, _______, _______,
                                            _______, _______,
                                                     _______,
                                   _______, _______, _______,
@@ -380,7 +380,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 }
             } else {
                 if (shifted) {
-                    register_mods(MOD_BIT(KC_LSHIFT));
+                    register_mods(MOD_BIT(KC_LSFT));
                 }
             }
             return false;
