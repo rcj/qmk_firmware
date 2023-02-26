@@ -93,9 +93,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------------+------+------+------+---------+------|      |           |      |------+-------+------+------+---------+--------------|
  * | SAE        |   A  |   S  |   D  |    F    |   G  |------|           |------|   H  |   J   |   K  |   L  |   Sym   | LEADER       |
  * |------------+------+------+------+---------+------|      |           |      |------+-------+------+------+---------+--------------|
- * |Sup+Ctrl/DEL|   Z  |   X  |   C  |    V    |   B  |      |           |      |   N  |   M   |   ,  |   .  |BRCS/SLSH| HYPER        |
+ * | GUI        |   Z  |   X  |   C  |    V    |   B  |      |           |      |   N  |   M   |   ,  |   .  |BRCS/SLSH| HYPER        |
  * `------------+------+------+------+---------+-------------'           `-------------+-------+------+------+---------+--------------'
- *   | Esc      |      |      | NPAD |   Ctrl  |                                       |  Alt  | GUI  |      | ADJUST  | Esc          |
+ *   | Esc      |      |      | NPAD |   Ctrl  |                                       |  Alt  | APP  |  GUI | ADJUST  | Esc          |
  *   `-----------------------------------------'                                       `----------------------------------------------'
  *                                       ,------------------.       ,---------------.
  *                                       |          |       |       |      |        |
@@ -109,10 +109,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // Otherwise, it needs KC_*
 [_QWERTY] = LAYOUT_ergodox(
         // left hand
-        KC_ESC, KC_1,    KC_2,    KC_3,        KC_4,      KC_5,   _______,
-        KC_TAB, KC_Q,    KC_W,    KC_E,        KC_R,      KC_T,   _______,
-        KC_CME, KC_A,    KC_S,    KC_D,        KC_F,      KC_G,
-        KC_SCD, KC_Z,    KC_X,    KC_C,        KC_V,      KC_B,   _______,
+        KC_ESC,  KC_1,    KC_2,    KC_3,        KC_4,      KC_5,   _______,
+        KC_TAB,  KC_Q,    KC_W,    KC_E,        KC_R,      KC_T,   _______,
+        KC_CME,  KC_A,    KC_S,    KC_D,        KC_F,      KC_G,
+        KC_LGUI, KC_Z,    KC_X,    KC_C,        KC_V,      KC_B,   _______,
         KC_ESC, _______, _______, KC_MOV,      KC_LCTL,
                                                      TG(_FFXIV), TG(_FFXIV),
                                                                     _______,
