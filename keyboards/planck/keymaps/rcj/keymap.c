@@ -1,11 +1,19 @@
-#include "planck.h"
+#include QMK_KEYBOARD_H
+
 #include "action_layer.h"
 
-#define MOD_SHIFT_MASK  (MOD_BIT(KC_LSHIFT)|MOD_BIT(KC_RSHIFT))
+#define MOD_SHIFT_MASK  (MOD_BIT(KC_LSFT)|MOD_BIT(KC_RSFT))
 #define MOD_CTRL_MASK   (MOD_BIT(KC_LCTL)|MOD_BIT(KC_RCTRL))
 #define MOD_ALT_MASK    (MOD_BIT(KC_LALT)|MOD_BIT(KC_RALT))
 
-extern keymap_config_t keymap_config;
+#define KC_DQOT LCAG(KC_Q)
+#define KC_DBRK LCAG(KC_R)
+#define KC_DBRC LCAG(KC_F)
+#define KC_DCRL LCAG(KC_C)
+#define KC_ANGL LCAG(KC_M)
+#define KC_SBUF LCAG(KC_B)
+#define KC_PREF LCAG(KC_U)
+#define KC_SWIN LCAG(KC_N)
 
 enum rcj_layers {
   _QWERTY,
@@ -32,18 +40,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-----------------------------------------------------------------------------------------------------.
  * |             |   Q  |  W  |   E   |  R   |   T   |   Y   |   U   |   I   |  O  |    P     | FN_KEYS  |
  * |-------------+------+-----+-------+------+---------------+-------+-------+-----+----------+----------|
- * | Sup+Alt/ENT |   A  |  S  |   D   |  F   |   G   |   H   |   J   |   K   |  L  |   Sym    | LEADER   |
+ * | Sup+Alt/ENT |   A  |  S  |   D   |  F   |   G   |   H   |   J   |   K   |  L  |   Sym    | '        |
  * |-------------+------+-----+-------+------+-------+-------+-------+-------+-----+----------+----------|
  * | Sup+Ctrl/DEL|   Z  |  X  |   C   |  V   |   B   |   N   |   M   |   ,   |  .  |BRCES/SLSH| HYPER    |
  * |-------------+------+-----+-------+------+-------+-------+-------+-------+-----+----------+----------|
- * |   Esc       |      |     | NPAD  | Ctrl |   Shift/SPC   |Alt/SPC|  GUI  |     |  ADJUST  | Esc      |
+ * |   Esc       |      |     | NPAD  | Ctrl |   Shift/SPC   |  Alt  |  GUI  |     |  ADJUST  | Esc      |
  * `-----------------------------------------------------------------------------------------------------'
  */
 [_QWERTY] = {
-  {_______,         KC_Q,    KC_W,    KC_E,        KC_R,    KC_T,          KC_Y,          KC_U,           KC_I,    KC_O,    KC_P,                 MO(_FN_KEYS)},
-  {SLALT_T(KC_ENT), KC_A,    KC_S,    KC_D,        KC_F,    KC_G,          KC_H,          KC_J,           KC_K,    KC_L,    MO(_SYMBOLS),         LEADER},
+  {KC_TAB,          KC_Q,    KC_W,    KC_E,        KC_R,    KC_T,          KC_Y,          KC_U,           KC_I,    KC_O,    KC_P,                 KC_RALT},
+  {SLALT_T(KC_ENT), KC_A,    KC_S,    KC_D,        KC_F,    KC_G,          KC_H,          KC_J,           KC_K,    KC_L,    MO(_SYMBOLS),         KC_QUOT},
   {SLCTL_T(KC_DEL), KC_Z,    KC_X,    KC_C,        KC_V,    KC_B,          KC_N,          KC_M,           KC_COMM, KC_DOT,  LT(_BRACES, KC_SLSH), KC_HYPR},
-  {KC_ESC,          _______, _______, MO(_NUMPAD), KC_LCTL, SFT_T(KC_SPC), SFT_T(KC_SPC), LALT_T(KC_SPC), KC_LGUI, _______, MO(_ADJUST),          KC_ESC}
+  {KC_ESC,          _______, _______, MO(_NUMPAD), KC_LCTL, SFT_T(KC_SPC), SFT_T(KC_SPC), KC_LALT,        KC_LGUI, _______, MO(_ADJUST),          KC_ESC}
 },
 
 /* Symbol-Map
@@ -58,10 +66,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------------------------------------------------'
  */
 [_SYMBOLS] = {
-  {_______, KC_GRV,  KC_BSLS, KC_EQL,  KC_ASTR, KC_TILD,    KC_PERC,    LGUI(KC_U), KC_TAB,  KC_BSPC, _______, _______},
-  {_______, KC_MINS, KC_UNDS, KC_COLN, KC_PIPE, KC_GT,      KC_AMPR,    KC_SCLN,    KC_EXLM, KC_LT,   _______, _______},
-  {_______, KC_PLUS, KC_AT,   KC_QUOT, KC_ENT,  LGUI(KC_B), LGUI(KC_N), KC_HASH,    KC_DLR,  KC_CIRC, _______, _______},
-  {_______, _______, _______, _______, _______, _______,    _______,    _______,    _______, _______, _______, _______}
+  {KC_PERC, KC_DQOT, KC_BSLS, KC_EQL,  KC_DBRK, KC_TILD,    KC_PIPE,    KC_PREF,    KC_TAB,  KC_BSPC, _______, _______},
+  {KC_ASTR, KC_MINS, KC_UNDS, KC_COLN, KC_DBRC, KC_GT,      KC_AMPR,    KC_SCLN,    KC_EXLM, KC_LT,   _______, _______},
+  {KC_ANGL, KC_PLUS, KC_AT,   KC_DCRL, KC_ENT,  KC_SBUF,    KC_SWIN,    KC_HASH,    KC_CIRC, KC_DLR,  _______, _______},
+  {KC_GRV , _______, _______, _______, _______, _______,    _______,    _______,    _______, _______, _______, _______}
 },
 
 /* Numpad
@@ -76,8 +84,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `------------------------------------------------------------------------------------'
  */
 [_NUMPAD] = {
-  {_______, KC_PSCR, KC_PGUP, KC_UP,   KC_PGDN, _______, _______, KC_7,    KC_8,    KC_9,    _______, _______},
-  {_______, KC_HOME, KC_LEFT, KC_DOWN, KC_RGHT, KC_END,  KC_DOT,  KC_4,    KC_5,    KC_6,    KC_0,    _______},
+  {_______, KC_PSCR, KC_PGUP, KC_UP,   KC_PGDN, _______, KC_0,    KC_7,    KC_8,    KC_9,    _______, _______},
+  {_______, KC_HOME, KC_LEFT, KC_DOWN, KC_RGHT, KC_END,  KC_DOT,  KC_4,    KC_5,    KC_6,    _______,    _______},
   {_______, KC_ENT,  KC_INS,  KC_TAB,  KC_SPC,  _______, KC_COMM, KC_1,    KC_2,    KC_3,    _______, _______},
   {_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______}
 },
@@ -130,9 +138,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------------------------------------------------------'
  */
 [_ADJUST] = {
-  {_______, RESET,   DEBUG,   _______, _______, _______, _______, TERM_ON, TERM_OFF,_______, _______, _______},
+  {_______, QK_BOOT,   DB_TOGG,   _______, _______, _______, _______, _______, _______,_______, _______, _______},
   {_______, QWERTY,  _______, AU_ON,   AU_OFF,  AG_NORM, AG_SWAP, QWERTY,  _______, _______, _______, _______},
-  {_______, MUV_DE,  MUV_IN,  MU_ON,   MU_OFF,  MI_ON,   MI_OFF,  _______, _______, _______, _______, _______},
+  {_______, AU_PREV,  AU_NEXT,  MU_ON,   MU_OFF,  MI_ON,   MI_OFF,  _______, _______, _______, _______, _______},
   {_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______}
 }
 
@@ -166,7 +174,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 }
             } else {
                 if (shifted) {
-                    register_mods(MOD_BIT(KC_LSHIFT));
+                    register_mods(MOD_BIT(KC_LSFT));
                 }
             }
             return false;
